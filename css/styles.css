@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100vw;
+    height: 100vh;
+}
+
+#emergency-search {
+    width: 60vw;
+    height: 2.8rem;
+    border: solid grey 1px;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    background: url("../public/search.svg") no-repeat scroll 7px 48%;
+    padding-left: 35px;
+}
+
+#emergency-search:focus {
+    outline: lightskyblue 2px solid;
+    width: 62vw;
+}
+
+#to-map-button {
+    margin-top: 5vh;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    border: solid 1px grey;
+    box-shadow: 2px 2px black;
+    transition: box-shadow 0.1s ease;
+}
+
+#to-map-button:hover {
+    cursor: pointer;
+}
+
+#to-map-button:active:hover {
+    box-shadow: none;
+}
