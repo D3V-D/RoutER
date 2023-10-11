@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 #map { 
-    height: 180px; 
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
