@@ -10,9 +10,8 @@
     <body>
         <img id="router-logo" src="/public/RoutERLogo.png">
 
-        <input id="emergency-search" type="text" placeholder="Type your emergency here...">
-            
-        </input>
+        <input id="emergency-search" name="emergency-search" type="text" onKeyUp="showResults(this.value)" placeholder="Type your emergency here..." />
+        <div id="autocomplete-results"></div>
 
         <a href="map/index.html">
             <button id="to-map-button">
