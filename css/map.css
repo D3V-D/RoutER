@@ -23,4 +23,8 @@
     left: 0;
     width: clamp(200px, 30vw, 450px);
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
