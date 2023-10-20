@@ -1,6 +1,7 @@
 var search_terms = ['hurricane', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', 'flood', 'sandstorm', 'shelter', 'post-disaster'];
 
 function autocompleteMatch(input) {
+input = input.toLowerCase();
   if (input == '') {
     return [];
   }
