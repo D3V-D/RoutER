@@ -1,4 +1,4 @@
-var search_terms = ['hurricane', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', flood', 'sandstorm', 'shelter', 'post-disaster'];
+var search_terms = ['hurricane', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', 'flood', 'sandstorm', 'shelter', 'post-disaster'];
 
 function autocompleteMatch(input) {
   if (input == '') {
