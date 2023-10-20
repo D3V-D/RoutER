@@ -47,6 +47,7 @@ body {
     top: 2.77rem;
     left: 0px;
     background: white;
+    overflow-y: scroll;
 }
 
 #autocomplete-results ul {
