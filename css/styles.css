@@ -38,7 +38,7 @@ body {
 }
 
 #autocomplete-results {
-    width: 100%;
+    width: calc(100% - 2px);
     max-height: 10rem; 
     border: solid #555 1px;
     border-bottom-left-radius: 7px;
@@ -47,10 +47,6 @@ body {
     top: 2.9rem;
     left: -1px;
     background: white;
-}
-
-#autocomplete-results ul {
-    list-style-type: none;
 }
 
 #to-map-button {
