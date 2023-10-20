@@ -62,7 +62,7 @@ body {
 
 #autocomplete-results ul li:hover {
     background-color: lightskyblue;
-    opacity: 60%;
+    opacity: 0.6;
     cursor: pointer;
 }
 
