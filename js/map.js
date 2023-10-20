@@ -1,5 +1,5 @@
 // for future form data reference //
-var formData = new FormData(document.querySelector('form'))
+// var formData = new FormData(document.querySelector('form'))
 // ----------------------------- //
 
 var map = L.map('map').setView([30.4380832, -84.2809332], 13);
