@@ -13,7 +13,7 @@ function autocompleteMatch(input) {
 }
 
 function showResults(val) {
-  res = document.getElementById("result");
+  res = document.getElementById("autocomplete-results");
   res.innerHTML = '';
   let list = '';
   let terms = autocompleteMatch(val);
