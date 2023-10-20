@@ -55,7 +55,7 @@ body {
 
 #autocomplete-results ul li {
     border-top: solid #555 1px;
-    padding-left: 5px;
+    padding: 10px;
     transition: all 0.4s ease;
 }
 
