@@ -52,7 +52,7 @@ body {
     background: white;
     overflow-y: scroll;
     font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 #autocomplete-results ul {
