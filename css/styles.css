@@ -34,6 +34,8 @@ body {
     border: solid #555 1px;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+    position: absolute;
+    
 }
 
 #to-map-button {
