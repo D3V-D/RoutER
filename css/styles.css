@@ -8,6 +8,10 @@ body {
     height: 100vh;
 }
 
+#router-logo {
+    width: clamp(200px, 20vw, 600px);
+}
+
 #emergency-search {
     width: 60vw;
     height: 2.8rem;
