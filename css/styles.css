@@ -13,6 +13,10 @@ body {
     width: clamp(200px, 20vw, 600px);
 }
 
+#search-container {
+    position: relative;
+}
+
 #emergency-search {
     width: 60vw;
     height: 2.8rem;
@@ -35,7 +39,8 @@ body {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     position: absolute;
-    
+    top: 2.8rem;
+    left: 0;
 }
 
 #to-map-button {
