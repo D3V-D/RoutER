@@ -62,7 +62,8 @@ body {
 
 #autocomplete-results ul li:hover {
     background-color: lightskyblue;
-    opacity: 75%;
+    opacity: 60%;
+    cursor: pointer;
 }
 
 #to-map-button {
