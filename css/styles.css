@@ -28,6 +28,14 @@ body {
     width: 62vw;
 }
 
+#autocomplete-results {
+    width: 60vw;
+    max-height: 10rem; 
+    border: solid #555 1px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
 #to-map-button {
     margin-top: 5vh;
     background: white;
