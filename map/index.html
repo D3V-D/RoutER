@@ -6,7 +6,12 @@
         <link rel="stylesheet" href="../css/leaflet.css"/>
     <body>
         <section id="sidebar">
-            
+            <form id="directions-form" onsubmit="calculateRoute()">
+                <!-- Stylize later -->
+                
+                <input id="from" name="from" placeholder="Start from..." type="text"/>
+                <input id="to" name="to" placeholder="End at..." type="text"/>
+            </form> 
         </section>
         <div id="map"></div>
     
