@@ -10,7 +10,7 @@ L.control.scale().addTo(map);
 var current_position, current_accuracy;
 
 var initialGeolocation = true;
-var currentlyTracking = true;
+var currentlyTracking = false;
 
 function onLocationFound(e) {
     
@@ -27,19 +27,25 @@ function onLocationFound(e) {
         lng: e.coords.longitude
     }
 
-    if (initialGeolocation) {
-        initialGeolocation = false;
-        map.setZoom(17);
-        alert("Location may be inaccurate; if so, please enter start address manually. Please wait a few seconds first.");
-        map.setView(latlng);
-    }
+    
 
     current_position = L.marker(latlng).addTo(map);
 
     current_accuracy = L.circle(latlng, radius).addTo(map);
 
     if (currentlyTracking) {
+        // if in tracking mode.
         map.setView(latlng);
+    }
+
+    if (initialGeolocation) {
+        initialGeolocation = false;
+        alert("Location may be inaccurate; if so, please enter start address manually. Please wait a few seconds first.");
+        map.setZoom(17);
+        setTimeout(() => {
+            map.setView(latlng);
+        }, 300);
+        console.log(latlng)
     }
 }
 
@@ -50,7 +56,7 @@ function onLocationError(e) {
 // geolocation
 
 navigator.geolocation.watchPosition(onLocationFound, onLocationError, {
-    maximumAge: 200,
+    maximumAge: 100,
     timeout: 5000,
     enableHighAccuracy: true
 });
