@@ -40,7 +40,7 @@ body {
     border-bottom-right-radius: 7px;
     position: absolute;
     top: 2.8rem;
-    left: 0;
+    left: -2px;
     background: white;
 }
 
