@@ -49,6 +49,20 @@ body {
     background: white;
 }
 
+#autocomplete-results ul {
+    list-style-type: none;
+}
+
+#autocomplete-results ul li {
+    border-top: solid #555 1px;
+    padding-left: 5px;
+    transition: all 0.4s ease;
+}
+
+#autocomplete-results ul li:hover {
+    background-color: aliceblue;
+}
+
 #to-map-button {
     margin-top: 5vh;
     background: white;
