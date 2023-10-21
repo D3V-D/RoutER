@@ -2,13 +2,13 @@
 <html>
     <head>
         <!-- CSS -->
-        <link rel="stylesheet" href="../css/map.css" />
         <link rel="stylesheet" href="../css/leaflet.css"/>
+        <link rel="stylesheet" href="../css/leaflet-routing-machine.css"/>
+        <link rel="stylesheet" href="../css/map.css" />
     <body>
         <section id="sidebar">
             <form id="directions-form" onsubmit="calculateRoute()">
-                <!-- Stylize later -->
-                
+                <h2>Directions</h2>
                 <input class="direction-input" id="from" name="from" placeholder="Start from..." type="text"/>
                 <input class="direction-input" id="to" name="to" placeholder="End at..." type="text"/>
             </form> 
@@ -17,6 +17,7 @@
     
         <!-- NOTE: Order of import is important. -->
         <script src="../js/leaflet.js"></script>
+        <script src="../js/leaflet-routing-machine.js"></script>
         <script src="../js/map.js"></script>
     </body>
 </html>

@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
     margin: 0;
     box-sizing: border-box;
 }
 
 #map { 
-    width: clamp(calc(100vw - 200px), 70vw, calc(100vw - 450px));
+    width: calc(100vw - clamp(200px, 30vw, 300px));
     position: absolute;
     height: 100vh;
-    left:  clamp(200px, 30vw, 450px);
+    left: clamp(200px, 30vw, 300px);
     top: 0;
     margin: 0;
     padding: 0;
@@ -16,13 +18,14 @@
 /** add maybe a slider to drag between sidebar and map **/
 
 #sidebar {
-    background: #EEE;
+    background: aliceblue;
     position: absolute;
     border-right: grey solid 2px;
     top: 0;
     left: 0;
-    width: clamp(200px, 30vw, 450px);
+    width: clamp(200px, 30vw, 300px);
     height: 100vh;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,4 +38,45 @@
     justify-content: center;
     align-items: center;
     gap: 2vh;
+    width: calc(100% - 20px);
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: solid 2px black;
+    border-radius: 2px;
+    box-shadow: 4px 4px black;
+    background: white;
+    color: black;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
+}
+
+.direction-input {
+    border: solid 2px black;
+    border-radius: 3px;
+    padding: 4px;
+    width: 100%;
+    height: 2rem;
+    text-overflow: ellipsis;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 300;
+}
+
+.map-button {
+    width: 34px;
+    height: 34px;
+    background: white;
+    line-height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black !important;
+    font-size: 22px;
+    text-align: center;
+    font-family: bold 'Lucida Console', Monaco, monospace;
+    border: 2px solid rgba(0,0,0,0.2);
+}
+
+.map-button:hover {
+    background-color: #f4f4f4;
 }

@@ -9,7 +9,43 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+L.Routing.control({
+    waypoints: [
+        L.latLng(30.4380832, -84.2809332),
+        L.latLng(30.45, -84.3)
+    ],
+    // show: false,
+    addWaypoints: false,
+    routeWhileDragging: false
+}).addTo(map);
+
 L.control.scale().addTo(map);
+
+L.Control.Track = L.Control.extend({
+    onAdd: function(map) {
+        let trackingButton = L.DomUtil.create('a', 'map-button');
+
+        trackingButton.innerHTML = "⮙";
+        trackingButton.href = '#';
+        trackingButton.role = 'button';
+        trackingButton.label = 'Track';
+        trackingButton.setAttribute('title', "Track");
+        trackingButton.setAttribute('aria-label', 'Track');
+        trackingButton.setAttribute('aria-disabled', 'false');
+
+        return trackingButton
+    },
+
+    onRemove: function(map) {
+
+    }
+})
+
+L.control.track = function(opts) {
+    return new L.Control.Track(opts);
+}
+
+L.control.track({ position: 'topleft' }).addTo(map);
 
 var current_position, current_accuracy;
 

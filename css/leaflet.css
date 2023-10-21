@@ -141,6 +141,12 @@
 	z-index: 1000;
 	pointer-events: none;
 	}
+.leaflet-top.leaflet-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .leaflet-top {
 	top: 0;
 	}
