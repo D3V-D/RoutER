@@ -27,6 +27,7 @@ function showResults(val) {
 function setSearchbarText(text) {
   let searchbar = document.getElementById("emergency-search");
   searchbar.value = "" + text;
+  showResults("");
   searchbar.focus();
 }
 
