@@ -44,8 +44,8 @@ function onLocationFound(e) {
 
     if (initialGeolocation) {
         initialGeolocation = false;
-        alert("Location may be inaccurate; if so, please enter start address manually. Please wait a few seconds first.");
         map.setZoom(17);
+        alert("Location may be inaccurate; if so, please enter start address manually. Please wait a few seconds first.");
         setTimeout(() => {
             map.setView(latlng);
         }, 300);

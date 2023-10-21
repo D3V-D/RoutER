@@ -11,7 +11,7 @@
         <img id="router-logo" src="/public/RoutERLogo.png">
 
         <div id="search-container">
-            <input id="emergency-search" name="emergency-search" type="text" onKeyUp="showResults(this.value)" placeholder="Type your emergency here..." />
+            <input id="emergency-search" name="emergency-search" type="text" onKeyPress="searchbarOnKeyPress(event)" onKeyUp="showResults(this.value)" placeholder="Type your emergency here..." />
             <div id="autocomplete-results"></div>
         </div>
 

@@ -13,7 +13,6 @@ body {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    overflow-y: hidden;
     font-family: 'League Spartan', sans-serif;
 }
 
@@ -57,12 +56,14 @@ body {
 
 #autocomplete-results ul {
     list-style-type: none;
+    overflow-x: hidden;
 }
 
 #autocomplete-results ul li {
     border-top: solid #555 1px;
     padding: 10px;
     transition: all 0.4s ease;
+    width: 100%;
 }
 
 #autocomplete-results ul li:hover {
