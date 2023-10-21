@@ -18,6 +18,7 @@
 /** add maybe a slider to drag between sidebar and map **/
 
 #sidebar {
+    overflow-x: hidden;
     background: aliceblue;
     position: absolute;
     border-right: grey solid 2px;
@@ -39,6 +40,7 @@
     align-items: center;
     gap: 2vh;
     width: calc(100% - 20px);
+    margin-top: 10vh;
     padding: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -49,6 +51,21 @@
     color: black;
     font-family: 'League Spartan', sans-serif;
     font-weight: 700;
+}
+
+#alt-options {
+    width: 100%;
+    background: white;
+    color: black;
+    border-top: solid 1px black;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px -2px 8px rgb(202, 202, 202);
 }
 
 .direction-input {
@@ -70,7 +87,7 @@
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    color: black !important;
+    color: black;
     font-size: 22px;
     text-align: center;
     font-family: bold 'Lucida Console', Monaco, monospace;
