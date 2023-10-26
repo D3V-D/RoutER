@@ -1,10 +1,10 @@
-// for future form data reference //
-// var formData = new FormData(document.querySelector('form'))
-// ----------------------------- //
+const directionsForm = document.getElementById('directions-form');
+const fromInput = document.getElementById("from");
+const toInput = document.getElementById("to");
 
 var map = L.map('map').setView([30.4380832, -84.2809332], 13);
 
-
+// actual map
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -12,6 +12,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 L.control.scale().addTo(map);
 
+// custom made tracking button
 L.Control.Track = L.Control.extend({
     onAdd: function(map) {
         let trackingButton = L.DomUtil.create('a', 'map-button');
@@ -37,6 +38,8 @@ L.Control.Track = L.Control.extend({
                 trackingButton.style.color = "black"
                 trackingButton.setAttribute('title', "Track");
             }
+
+
         })
 
         return trackingButton
@@ -85,13 +88,15 @@ function onLocationFound(e) {
         ])
     }
 
+
+    // only runs on first SUCCESSFUL geolocation
     if (initialGeolocation) {
+        // toggle variables
         initialGeolocation = false;
         initialGeolocationError = false;
+
+        //set zoom & view & create route.
         map.setZoom(17);
-        setTimeout(() => {
-            map.setView(latlng);
-        }, 1000);
         alert("Location may be inaccurate; if so, please enter start address manually.")
         routingControl = L.Routing.control({
             waypoints: [
@@ -102,6 +107,12 @@ function onLocationFound(e) {
             addWaypoints: false,
             routeWhileDragging: false,
         }).addTo(map);
+        setTimeout(() => {
+            map.setView(latlng);
+            fromInput.value = "Your Location"
+            // toInput.value = #### 
+            // need to get database connected
+        }, 400);
         current_accuracy = L.circle(latlng, radius).addTo(map);
     }
 }
@@ -116,10 +127,101 @@ function onLocationError(e) {
 }
 
 // geolocation
+let positionTracker;
+if (navigator.geolocation) {
+    positionTracker = navigator.geolocation.watchPosition(onLocationFound, onLocationError, {
+        maximumAge: 0,
+        timeout: 5000,
+        enableHighAccuracy: true
+    });     
+} else {
+    alert("Geolocation is not supported for this OS/Browser. Please input start manually.")
+}
 
-navigator.geolocation.watchPosition(onLocationFound, onLocationError, {
-    maximumAge: 100,
-    timeout: 5000,
-    enableHighAccuracy: true
-});
-  
+// deal with directions form submission
+async function routeFromInput(e) {
+    e.preventDefault()
+    let eitherInputFailed = false;
+
+    // check for valid inputs
+    if (fromInput.value.trim().length === 0 || fromInput.value == "Your Location") {
+        fromInput.style.border = "solid 2px red";
+        eitherInputFailed = true;
+    } else {
+        fromInput.style.border = "solid 2px black";
+    }
+
+    // test for a non-empty string (aka has actual characters & not just whitespaces)
+    if (toInput.value.trim().length === 0) {
+        toInput.style.border = "solid 2px red";
+        eitherInputFailed = true;
+    } else {
+        toInput.style.border = "solid 2px black";
+    }
+
+    // if either input failed, then return no value and end function
+    if (eitherInputFailed) {
+        return;
+    }
+
+
+    let fromLocation;
+    let toLocation;
+    try {
+        // if inputs pass, first cancel user geolocation so it
+        // doesn't attempt to interfere
+        if (navigator.geolocation) {
+            navigator.geolocation.clearWatch(positionTracker);
+        }
+
+        // also temp. disable input fields
+        fromInput.disabled = true;
+        toInput.disabled = true;
+
+        // now locate input locations, then route
+        let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function findLocations() {
+            fromLocation = await geolocate(fromInput.value);
+            wait(1300);
+            toLocation = await geolocate(toInput.value);        
+        }
+
+        await findLocations();
+
+        let fromLat = fromLocation[0].lat
+        let fromLng = fromLocation[0].lon
+
+        let toLat = toLocation[0].lat
+        let toLng = toLocation[0].lon
+
+        routingControl.setWaypoints([
+            L.latLng(fromLat, fromLng),
+            L.latLng(toLat, toLng)
+        ])
+
+        // MOVE THIS, HAVE EACH SET
+        // INDIVIDUALLY, NOT JUST WITH SUBMISSION
+        fromInput.value = fromLocation[0].display_name
+        toInput.value = toLocation[0].display_name
+
+        fromInput.disabled = false;
+        toInput.disabled = false;
+    } catch(e) {
+        fromInput.disabled = false;
+        toInput.disabled = false;
+
+        //check which one errored, to provide visual feedback
+        if (!fromLocation[0]) {
+            // if from doesn't exist
+            fromInput.style.border = "solid 2px red";
+        }
+
+        if (!toLocation[0]) {
+            // if to doesn't exist
+            toInput.style.border = "solid 2px red";
+        }
+
+        console.error(e)
+    }
+} 

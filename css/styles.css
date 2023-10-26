@@ -81,6 +81,7 @@ body {
     border: solid 1px grey;
     box-shadow: 2px 2px black;
     transition: box-shadow 0.1s ease;
+    color: black;
 }
 
 #to-map-button:hover {
