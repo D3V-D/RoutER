@@ -1,4 +1,5 @@
 var search_terms = ['hurricane', 'hungry', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', 'flood', 'sandstorm', 'shelter', 'post-disaster shelters'];
+let chosenEmergency;
 
 function autocompleteMatch(input) {
   input = input.toLowerCase();
@@ -35,12 +36,15 @@ function searchbarOnKeyPress(e) {
   let searchbar = document.getElementById("emergency-search");
   if (e.key == "Enter") {
     if (search_terms.includes(searchbar.value)) {
-      alert(searchbar.value);
-      // do something with value -> probably process & send
-      // to map
+      chosenEmergency = searchbar.value;
+      // accesible by map.js
     } else {
-      alert("Please choose an emergency from the list! Or, go to the map.");
-      // maybe remove and just redirect to map
+      // if empty or other value
+      // basically redirects to map normally
+      chosenEmergency = "invalid entry"
     }
+    // send to map
+    // NOTE: doesn't work locally, only on internet
+    window.location.replace("/map/index.html");
   }
 }
