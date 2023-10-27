@@ -39,16 +39,18 @@ function searchbarOnKeyPress(e, usingButton) {
   if (e.key == "Enter" || usingButton) {
     let searchbar = document.getElementById("emergency-search");
     if (search_terms.includes(searchbar.value)) {
-      window.localStorage.setItem("emergency", searchbar.value)
+      window.sessionStorage.setItem("emergency", searchbar.value)
       // accessible by map.js by employing local storage
     } else {
       // if empty or other value
       // basically redirects to map normally
-      window.localStorage.setItem("emergency", "Invalid entry.")
+      window.sessionStorage.setItem("emergency", "Invalid entry.")
     }
-    alert(window.localStorage.getItem("emergency"))
+    alert(window.sessionStorage.getItem("emergency"))
    // send to map
     // NOTE: doesn't work locally, only on internet
-    document.location.href = "/map/index.html";
+    if (!usingButton) {
+      window.location.href = "/map/";
+    }
   }
 }

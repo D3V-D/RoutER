@@ -103,7 +103,7 @@ L.control.track({ position: 'topleft' }).addTo(map);
 
 // locate closest solution according to chosen emergency
 function findClosestEmergencySolution() {
-    console.log(window.localStorage.getItem("emergency"))
+    console.log(window.sessionStorage.getItem("emergency"))
 }
 
 function onLocationFound(e) {
