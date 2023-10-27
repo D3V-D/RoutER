@@ -45,6 +45,6 @@ function searchbarOnKeyPress(e) {
     }
     // send to map
     // NOTE: doesn't work locally, only on internet
-    window.location.replace("/map/index.html");
+    window.location.href = "/map/index.html";
   }
 }
