@@ -20,8 +20,6 @@ var initialGeolocationError = true;
 var currentlyTracking = false;
 let geolocatorExists = false;
 
-findClosestEmergencySolution()
-
 var map = L.map('map').setView([39.8097343, -98.5556199], 3);
 
 // actual map
@@ -47,8 +45,15 @@ L.control.scale().addTo(map);
 L.Control.Track = L.Control.extend({
     onAdd: function(map) {
         let trackingButton = L.DomUtil.create('a', 'map-button');
+        let trackingIcon = L.DomUtil.create('img', 'tracking-icon');
+        
+        trackingIcon.src = "../public/compass-regular.svg"
+        trackingIcon.style.width = "70%"
+        trackingIcon.style.position = "absolute"
+        trackingIcon.style.top = "13%"
+        trackingIcon.style.left = "13%"
 
-        trackingButton.innerHTML = "⮙";
+        trackingButton.appendChild(trackingIcon)
         trackingButton.href = '#';
         trackingButton.style.color = "black"
         trackingButton.role = 'button';
@@ -102,8 +107,29 @@ L.control.track = function(opts) {
 L.control.track({ position: 'topleft' }).addTo(map);
 
 // locate closest solution according to chosen emergency
-function findClosestEmergencySolution() {
-    console.log(window.sessionStorage.getItem("emergency"))
+async function findClosestEmergencySolution(userLoc) {
+    let emergency = window.sessionStorage.getItem("emergency");
+    switch(emergency) {
+        case "hospital":
+            let closestHospital = await findClosestHospital(userLoc);
+            toLat = closestHospital.lat;
+            toLng = closestHospital.lon;
+
+            routingControl.setWaypoints([
+                L.latLng(latlng.lat, latlng.lon),
+                L.latLng(toLat, toLng)
+            ]).addTo(map);
+
+            toInput.value = closestHospital.name
+        default:
+            // if called w/out emergency, simply remake existing path
+            routingControl.setWaypoints([
+                L.latLng(latlng.lat, latlng.lon),
+                L.latLng(toLat, toLng)
+            ]).addTo(map);
+            break;
+    }
+
 }
 
 function onLocationFound(e) {
@@ -117,7 +143,7 @@ function onLocationFound(e) {
 
     latlng = {
         lat: e.coords.latitude,
-        lng: e.coords.longitude
+        lon: e.coords.longitude
     }
 
     // only runs on first SUCCESSFUL geolocation
@@ -134,12 +160,7 @@ function onLocationFound(e) {
         setTimeout(() => {
             map.setView(latlng);
             fromInput.value = "Your Location"
-            // toInput.value = #### 
-            // need to get database connected
-            routingControl.setWaypoints([
-                L.latLng(latlng.lat, latlng.lng),
-                L.latLng(toLat, toLng)
-            ]).addTo(map);
+            findClosestEmergencySolution(latlng)
         }, 600);
         current_accuracy = L.circle(latlng, radius).addTo(map);
     }
@@ -161,7 +182,7 @@ function onLocationFound(e) {
         map.setView(latlng);
         map.setZoom(17);
         routingControl.setWaypoints([
-            L.latLng(latlng.lat, latlng.lng),
+            L.latLng(latlng.lat, latlng.lon),
             L.latLng(toLat, toLng)
         ])
         fromInput.value = "Your Location"
@@ -270,15 +291,12 @@ async function route(fromUserLocation) {
         toInput.disabled = true;
 
         // now locate input locations, then route
-        let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
         async function findLocations() {
             if (fromUserLocation) {
-                fromLocation = await geolocate(latlng.lat + " " + latlng.lng);
+                fromLocation = await geolocate(latlng.lat + " " + latlng.lon);
             } else {
                 fromLocation = await geolocate(fromInput.value);
             }            
-            wait(1300);
             toLocation = await geolocate(toInput.value);        
         }
 
