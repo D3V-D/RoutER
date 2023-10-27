@@ -1,5 +1,4 @@
 var search_terms = ['hurricane', 'hungry', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', 'flood', 'sandstorm', 'shelter', 'post-disaster shelters'];
-let chosenEmergency;
 
 function autocompleteMatch(input) {
   input = input.toLowerCase();
@@ -32,19 +31,24 @@ function setSearchbarText(text) {
   searchbar.focus();
 }
 
-function searchbarOnKeyPress(e) {
-  let searchbar = document.getElementById("emergency-search");
-  if (e.key == "Enter") {
+/**
+ * 
+ * usingButton => boolean value for whether or not button was used 
+ */
+function searchbarOnKeyPress(e, usingButton) {
+  if (e.key == "Enter" || usingButton) {
+    let searchbar = document.getElementById("emergency-search");
     if (search_terms.includes(searchbar.value)) {
-      chosenEmergency = searchbar.value;
-      // accesible by map.js
+      window.localStorage.setItem("emergency", searchbar.value)
+      // accessible by map.js by employing local storage
     } else {
       // if empty or other value
       // basically redirects to map normally
-      chosenEmergency = "invalid entry"
+      window.localStorage.setItem("emergency", "Invalid entry.")
     }
-    // send to map
+    alert(window.localStorage.getItem("emergency"))
+   // send to map
     // NOTE: doesn't work locally, only on internet
-    window.location.href = "/map/index.html";
+    document.location.href = "/map/index.html";
   }
 }

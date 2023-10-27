@@ -103,11 +103,7 @@ L.control.track({ position: 'topleft' }).addTo(map);
 
 // locate closest solution according to chosen emergency
 function findClosestEmergencySolution() {
-    if (chosenEmergency == "invalid entry") {
-        console.log("Invalid emergency. Normal redirect.")
-    } else {
-        console.log("Testing: " + chosenEmergency)
-    }
+    console.log(window.localStorage.getItem("emergency"))
 }
 
 function onLocationFound(e) {

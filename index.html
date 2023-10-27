@@ -11,12 +11,12 @@
         <img id="router-logo" src="/public/RoutERLogo.png">
 
         <div id="search-container">
-            <input id="emergency-search" name="emergency-search" type="text" onKeyPress="searchbarOnKeyPress(event)" onKeyUp="showResults(this.value)" placeholder="Type your emergency here..." />
+            <input id="emergency-search" name="emergency-search" type="text" onKeyPress="searchbarOnKeyPress(event, false)" onKeyUp="showResults(this.value)" placeholder="Type your emergency here..." />
             <div id="autocomplete-results"></div>
         </div>
 
         <a href="map/index.html">
-            <button id="to-map-button">
+            <button onclick="searchbarOnKeyPress(event, true)" id="to-map-button">
                 Map ➜
             </button>
         </a>
