@@ -20,6 +20,8 @@ var initialGeolocationError = true;
 var currentlyTracking = false;
 let geolocatorExists = false;
 
+findClosestEmergencySolution()
+
 var map = L.map('map').setView([39.8097343, -98.5556199], 3);
 
 // actual map
