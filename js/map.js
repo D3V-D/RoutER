@@ -340,3 +340,8 @@ async function route(fromUserLocation) {
         console.error(e)
     }
 }
+
+findClosestHospital({
+    lat: 30.547631808910165,
+    lon: -84.23383071896907
+})

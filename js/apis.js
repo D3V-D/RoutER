@@ -48,7 +48,7 @@ async function reverseGeolocate(lat, lon) {
  *  destinations => array of latlng objects
  * 
  *  returns object with 
- *  latlng object and place name
+ *  latlng, place name, time in seconds, and array of alt locations (just gives back index in destinations list and time it takes)
  */
 async function findClosestLocation(sourceLatLng, destinations) {
     // first build url for api call
@@ -74,7 +74,6 @@ async function findClosestLocation(sourceLatLng, destinations) {
         }
     }
 
-
     // call api
     const response = await fetch(url, {
         method: "GET",
@@ -84,20 +83,39 @@ async function findClosestLocation(sourceLatLng, destinations) {
 
     const distancesJSON = await response.json();
     const durations = distancesJSON.durations[0]
-    
     // remove possible null values
-    const filteredDurations = durations.filter((val) => {
+    let filteredDurations = durations.filter((val) => {
         return val !== null;
     })
-    console.log(filteredDurations)
-    const shortestDuration = Math.max(...filteredDurations)
-    const indexOfShortest = durations.indexOf(shortestDuration)
+    const shortestDuration = Math.min(...filteredDurations)
+    const indexOfShortest = filteredDurations.indexOf(shortestDuration)
     const locationFromIndex = distancesJSON.destinations[indexOfShortest]
     const locationName = await reverseGeolocate(locationFromIndex.location[1], locationFromIndex.location[0])
+    
+    // create list of alternate locations to create alt routes
+    let altPlacesArr = []
+    for (let altIndex = 0; altIndex < filteredDurations.length; altIndex++) {
+        // don't include closest location
+        if (altIndex !== indexOfShortest) {
+            let altTime = filteredDurations[altIndex]
+            altPlacesArr.push({
+                altLocIndex: altIndex,
+                time: altTime
+            })
+        }
+    }
+
+    altPlacesArr = altPlacesArr.sort(function(a, b) {
+        return a.time - b.time;
+        // sort by time
+    })
+
     const closestPlace = {
         lat: locationFromIndex.location[1],
         lon: locationFromIndex.location[0],
-        name: locationName.display_name
+        name: locationName.display_name,
+        time: shortestDuration,
+        altPlaces: altPlacesArr
     }
     return closestPlace;
 }
@@ -143,6 +161,25 @@ async function findClosestHospital(userLocation) {
         }
 
         const closestHospital = await findClosestLocation(userLocation, hospitalLatLngs);
+
+        // for all hospitals not the closest one
+        // add to alternate locations
+        const altRoutesContainer = document.getElementById("alternate-routes");
+        altRoutesContainer.innerHTML = ""
+        for (const altHospital of closestHospital.altPlaces) {
+            let currentHospitalDetails = hospitals.features[altHospital.altLocIndex].attributes
+
+            const altRouteDiv = document.createElement("div");
+            altRouteDiv.classList.add("alternate-route");
+            altRouteDiv.innerHTML = "<h3>" + currentHospitalDetails.NAME + "</h3>"
+            altRouteDiv.innerHTML += currentHospitalDetails.ADDRESS
+            altRouteDiv.innerHTML += "<span class='" + currentHospitalDetails.STATUS.toLowerCase() + "'>" + currentHospitalDetails.STATUS + "</span>"
+            altRouteDiv.innerHTML += "Time: " + Math.floor(altHospital.time/60) + "m"
+            altRouteDiv.innerHTML += "<button class='alternate-route-button form-button'>Route</button>"
+
+            altRoutesContainer.appendChild(altRouteDiv)
+        }
+        
         return closestHospital;
     } catch(e) {
         // usually because county is not in U.S

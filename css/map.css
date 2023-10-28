@@ -93,7 +93,6 @@
     color: black;
     border-top: solid 1px black;
     height: 100%;
-    padding: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-top: 20px;
@@ -104,7 +103,17 @@
 }
 
 #choose-emergency {
-    margin-bottom: 50px;
+    padding: 20px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+#choose-emergency-button {
+    background: aliceblue;
 }
 
 #emergency-choice-title {
@@ -128,6 +137,60 @@ select {
 
 select:focus {
     outline: solid 2px skyblue;
+}
+
+#alt-routes-title {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 800;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px black;
+    width: 100%;
+    text-align: center;
+}
+
+#alternate-routes {
+    height: 100%;
+    padding: 20px;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow-y: scroll;
+}
+
+#no-alts {
+    color: rgba(128, 128, 128, 0.767);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.212);
+}
+
+.alternate-route {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    border-radius: 2px;
+    border: solid 2px black;
+}
+
+.alternate-route-button {
+    margin-left: calc(70% - clamp(70px, 40%, 2000px));
+}
+
+.open {
+    background-color: aquamarine;
+    width: fit-content;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.closed {
+    background-color: #f66151;
+    width: fit-content;
+    padding: 2px;
+    border-radius: 4px;
 }
 
 .direction-input {
