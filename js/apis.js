@@ -89,8 +89,8 @@ async function findClosestLocation(sourceLatLng, destinations) {
     const filteredDurations = durations.filter((val) => {
         return val !== null;
     })
-
-    const shortestDuration = Math.min(...filteredDurations)
+    console.log(filteredDurations)
+    const shortestDuration = Math.max(...filteredDurations)
     const indexOfShortest = durations.indexOf(shortestDuration)
     const locationFromIndex = distancesJSON.destinations[indexOfShortest]
     const locationName = await reverseGeolocate(locationFromIndex.location[1], locationFromIndex.location[0])
@@ -141,7 +141,7 @@ async function findClosestHospital(userLocation) {
                 lon: hospital.attributes.LONGITUDE
             })
         }
-        await wait(500)
+
         const closestHospital = await findClosestLocation(userLocation, hospitalLatLngs);
         return closestHospital;
     } catch(e) {
