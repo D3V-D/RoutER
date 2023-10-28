@@ -1,4 +1,4 @@
-var search_terms = ['hospital', 'post-disaster shelters', 'evacuation', 'disaster shelters', 'homeless shelters']
+var search_terms = ['hospital', 'post-disaster shelters', 'evacuation', 'disaster shelters']
 
 function autocompleteMatch(input) {
   input = input.toLowerCase();
