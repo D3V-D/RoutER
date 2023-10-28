@@ -1,4 +1,4 @@
-var search_terms = ['hurricane', 'hungry', 'tsunami', 'earthquake', 'hospital', 'fire', 'tornado', 'blizzard', 'homeless', 'food', 'flood', 'sandstorm', 'shelter', 'post-disaster shelters'];
+var search_terms = ['hospital', 'post-disaster shelters', 'evacuation', 'disaster shelters', 'homeless shelters']
 
 function autocompleteMatch(input) {
   input = input.toLowerCase();

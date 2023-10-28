@@ -108,10 +108,24 @@ L.control.track({ position: 'topleft' }).addTo(map);
 
 // locate closest solution according to chosen emergency
 async function findClosestEmergencySolution(userLoc) {
+    // temp disable changing emergency
+    document.getElementById("emergency-select").disabled = true
+    document.getElementById("choose-emergency-button").disabled = true
+
     let emergency = window.sessionStorage.getItem("emergency");
     switch(emergency) {
         case "hospital":
             let closestHospital = await findClosestHospital(userLoc);
+            
+            // none found
+            if (closestHospital == -1) {
+                routingControl.setWaypoints([
+                    L.latLng(latlng.lat, latlng.lon),
+                    L.latLng(latlng.lat, latlng.lon)
+                ]).addTo(map);
+                break;
+            }
+            
             toLat = closestHospital.lat;
             toLng = closestHospital.lon;
 
@@ -120,7 +134,55 @@ async function findClosestEmergencySolution(userLoc) {
                 L.latLng(toLat, toLng)
             ]).addTo(map);
 
+            fromInput.value = 'Your Location'
             toInput.value = closestHospital.name
+            break;
+        case "evacuation":
+            let closestShelter = await findClosestShelter(userLoc, false);
+
+            // none found
+            if (closestShelter == -1) {
+                routingControl.setWaypoints([
+                    L.latLng(latlng.lat, latlng.lon),
+                    L.latLng(latlng.lat, latlng.lon)
+                ]).addTo(map);
+                break;
+            }
+
+            toLat = closestShelter.lat;
+            toLng = closestShelter.lon;
+
+            routingControl.setWaypoints([
+                L.latLng(latlng.lat, latlng.lon),
+                L.latLng(toLat, toLng)
+            ]).addTo(map);
+
+            fromInput.value = 'Your Location'
+            toInput.value = closestShelter.name
+            break;
+        case "post-disaster shelters":
+            let closestPostShelter = await findClosestShelter(userLoc, true);
+
+            // none found
+            if (closestPostShelter == -1) {
+                routingControl.setWaypoints([
+                    L.latLng(latlng.lat, latlng.lon),
+                    L.latLng(latlng.lat, latlng.lon)
+                ]).addTo(map);
+                break;
+            }
+
+            toLat = closestPostShelter.lat;
+            toLng = closestPostShelter.lon;
+
+            routingControl.setWaypoints([
+                L.latLng(latlng.lat, latlng.lon),
+                L.latLng(toLat, toLng)
+            ]).addTo(map);
+
+            fromInput.value = 'Your Location'
+            toInput.value = closestPostShelter.name
+            break;
         default:
             // if called w/out emergency, simply remake existing path
             routingControl.setWaypoints([
@@ -130,6 +192,22 @@ async function findClosestEmergencySolution(userLoc) {
             break;
     }
 
+    // re-enable changing emergency
+    document.getElementById("emergency-select").disabled = false
+    document.getElementById("choose-emergency-button").disabled = false
+}
+
+// when emergency is manually changed
+async function changeEmergencyTo(e) {
+    e.preventDefault()
+    let newEmergency = document.getElementById("emergency-select").value
+    window.sessionStorage.setItem("emergency", newEmergency);
+
+    if (geolocatorExists) {
+        findClosestEmergencySolution(latlng);
+    } else {
+        alert("Please turn on location to use this feature. (Click on the tracking button on the map to enable)")
+    }
 }
 
 function onLocationFound(e) {

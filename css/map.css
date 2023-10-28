@@ -173,6 +173,7 @@ select:focus {
     padding: 10px;
     border-radius: 2px;
     border: solid 2px black;
+    background-color: white;
 }
 
 .alternate-route-button {
