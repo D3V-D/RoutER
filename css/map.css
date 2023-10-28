@@ -26,7 +26,6 @@
     left: 0;
     width: clamp(200px, 30vw, 300px);
     height: 100vh;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,13 +92,41 @@
     color: black;
     border-top: solid 1px black;
     height: 100%;
+    padding: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     box-shadow: 0px -2px 8px rgb(202, 202, 202);
+}
+
+#choose-emergency {
+    margin-bottom: 50px;
+}
+
+#emergency-choice-title {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 800;
+}
+
+select {
+    background-color: whitesmoke;
+    border: solid 1px black;
+    border-radius: 2px;
+    font-size: 1rem;
+    margin: 2px;
+    padding: 4px;
+    padding-left: 6px;
+    width: 100%;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: solid 2px skyblue;
 }
 
 .direction-input {

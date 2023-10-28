@@ -17,13 +17,16 @@
                 </div>
             </form> 
             <div id="alt-options">
-                <!-- Have alternate options -->
-                <!-- AKA, change emergency, or change chosen destination -->
-                <div id="placeholder">
-                    <!-- ... will have alt. options.
-                    Change emergency dropdown, change chosen destination for emergency, switch from car to walking, & so on. -->
-                </div>
+                <form id="choose-emergency">
+                    <h2 id="emergency-choice-title">Choose Emergency</h2>
+                    <select name="emergencies" id="emergency-select">
+                        <option value="">--Emergencies--</option>
+                        <option value="hospital">Need Hospital</option>
+                        <option value="...">W.I.P</option>
+                    </select>
+                </form>
             </div>
+            
         </section>
         <div id="map"></div>
     
