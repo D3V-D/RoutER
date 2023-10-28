@@ -190,7 +190,7 @@ async function findClosestHospital(userLocation) {
             altRouteDiv.innerHTML += currentHospitalDetails.ADDRESS
             altRouteDiv.innerHTML += "<span class='" + currentHospitalDetails.STATUS.toLowerCase() + "'>" + currentHospitalDetails.STATUS + "</span>"
             altRouteDiv.innerHTML += "Time: " + Math.round(altHospital.time/60) + "m"
-            altRouteDiv.innerHTML += "<button class='alternate-route-button form-button'>Route</button>"
+            altRouteDiv.innerHTML += "<button class='alternate-route-button form-button' onclick=\"altRoute('" + currentHospitalDetails.ADDRESS + "')\">Route</button>"
 
             altRoutesContainer.appendChild(altRouteDiv)
         }
@@ -284,7 +284,7 @@ async function findClosestShelter(userLocation, postDisaster) {
         altRouteDiv.innerHTML += currentShelterDetails.address_1
         altRouteDiv.innerHTML += "<span class='" + currentShelterDetails.shelter_status_code.toLowerCase() + "'>" + currentShelterDetails.shelter_status_code + "</span>"
         altRouteDiv.innerHTML += "Time: " + Math.round(altShelter.time/60) + "m"
-        altRouteDiv.innerHTML += "<button class='alternate-route-button form-button'>Route</button>"
+        altRouteDiv.innerHTML += "<button class='alternate-route-button form-button' onclick=\"altRoute('" + currentShelterDetails.address + "')\">Route</button>"
 
         altRoutesContainer.appendChild(altRouteDiv)
     }

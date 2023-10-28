@@ -144,7 +144,7 @@ async function findClosestEmergencySolution(userLoc) {
             if (closestShelter == -1) {
                 routingControl.setWaypoints([
                     L.latLng(latlng.lat, latlng.lon),
-                    L.latLng(latlng.lat, latlng.lon)
+                    L.latLng(null, null)
                 ]).addTo(map);
                 break;
             }
@@ -167,7 +167,7 @@ async function findClosestEmergencySolution(userLoc) {
             if (closestPostShelter == -1) {
                 routingControl.setWaypoints([
                     L.latLng(latlng.lat, latlng.lon),
-                    L.latLng(latlng.lat, latlng.lon)
+                    L.latLng(null, null)
                 ]).addTo(map);
                 break;
             }
@@ -208,6 +208,15 @@ async function changeEmergencyTo(e) {
     } else {
         alert("Please turn on location to use this feature. (Click on the tracking button on the map to enable)")
     }
+}
+
+function clearDirections() {
+    fromInput.value = ""
+    toInput.value = ""
+    routingControl.setWaypoints([
+        L.latLng(latlng.lat, latlng.lon),
+        L.latLng(null, null)
+    ]).addTo(map);
 }
 
 function onLocationFound(e) {
@@ -348,6 +357,11 @@ async function routeFromInput(e) {
     route(false);
 } 
 
+// in case of an alt-route choice
+async function altRoute(address) {
+    toInput.value = address;
+    route(true);
+}
 
 // actually use api to route with the verified data
 /**
