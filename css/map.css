@@ -6,10 +6,10 @@
 }
 
 #map { 
-    width: calc(100vw - clamp(200px, 30vw, 300px));
+    width: calc(100vw - clamp(150px, 30vw, 300px));
     position: absolute;
     height: 100vh;
-    left: clamp(200px, 30vw, 300px);
+    left: clamp(150px, 30vw, 300px);
     top: 0;
     margin: 0;
     padding: 0;
@@ -24,7 +24,7 @@
     border-right: grey solid 2px;
     top: 0;
     left: 0;
-    width: clamp(200px, 30vw, 300px);
+    width: clamp(150px, 30vw, 300px);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -63,13 +63,14 @@
 }
 
 .form-button {
-    width: 40%;
+    width: clamp(70px, 40%, 2000px);
     height: 2rem;
     font-family: 'League Spartan', sans-serif;
     font-weight: 700;
     letter-spacing: 0.02em;
     border: solid 1px black;
     cursor: pointer;
+    padding: 2px;
     box-shadow: 2px 2px black;
     transition: all 0.2s ease;
 }
