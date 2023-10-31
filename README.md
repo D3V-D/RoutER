@@ -1,4 +1,4 @@
-# Rout<span style="color:red;">ER</span>.
+# Rout$${\color{red}Red}$$
 Leverages API data to provide the quickest routes to nearby disaster relief shelters, hospitals, and other important locations.
 
 # APIS/TOOLS
