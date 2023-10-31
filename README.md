@@ -1,9 +1,10 @@
 # RoutER
-Leverages API data to provide the quickest routes to nearby disaster relief shelters, hospitals, and other important locations. Plan to publish to App Store and Google Play.
+Leverages API data to provide the quickest routes to nearby disaster relief shelters, hospitals, and other important locations.
 
 # APIS/TOOLS
-- FEMA API
-- Leaflet
+- HIFLD Database
+- Leaflet.js
 - Open Street Map
-- Project OSRM
+- Project OSRM (Open-Source Routing Machine)
+- Netlify
 
